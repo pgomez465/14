@@ -1,0 +1,19 @@
+{
+  "name": "webrtc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "signalhub": "signalhub listen -p 8080",
+    "start": "budo index.js:bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "budo": "^11.6.3",
+    "getusermedia": "^2.0.1",
+    "signalhub": "^4.9.0",
+    "simple-peer": "^9.6.2"
+  }
+}
