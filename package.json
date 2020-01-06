@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "signalhub": "signalhub listen -p 8080",
-    "start": "budo index.js:bundle.js"
+    "start": "budo index.js"
   },
   "author": "",
   "license": "ISC",
