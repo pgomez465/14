@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   title = 'Chat';
 
   targetPeer: any;
+  targetPeer2: any;
   peer: any;
   offer;
 
@@ -27,9 +28,9 @@ export class ChatComponent implements OnInit {
     navigator.getUserMedia({video: true, audio: true}, (stream)=> {
 
       this.peer = new SimplePeer ({
-        initiator: location.hash === '',
+        //initiator: location.hash === '',
         trickle: false,
-        //stream: stream,
+        stream: stream,
 
       }) 
 
@@ -41,7 +42,7 @@ export class ChatComponent implements OnInit {
       })
 
       this.db.doc('VideoIDs/IDs').valueChanges().subscribe(val => {
-        this.targetPeer = val['P2P'];
+        this.targetPeer2 = val['P2P'];
       })
 
       this.peer.on('data', (data)=> {
@@ -54,19 +55,17 @@ export class ChatComponent implements OnInit {
         video.play();
       })
 
-     }, (err)=> {
+      }, (err)=> {
       console.log('Connection Error' + err);
-    }) 
+    })  
   }
 
   connect() {
     
-        
-      
-      
-    console.log(this.targetPeer)
+
+    console.log(this.targetPeer2)
     
-    this.peer.signal(JSON.parse(this.targetPeer));
+    this.peer.signal(JSON.parse(this.targetPeer2));
     
     
   }

@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   title = 'Home';
 
   targetPeer: any;
+  targetPeer2: any;
   peer: any;
   ID;
 
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit {
         
       })
       this.db.doc('VideoIDs/IDs').valueChanges().subscribe(val => {
-        this.targetPeer = val['P2Pr'];
+        this.targetPeer2 = val['P2Pr'];
       })
 
       this.peer.on('data', (data)=> {
@@ -53,15 +54,15 @@ export class HomeComponent implements OnInit {
         video.play();
       })
 
-     }, (err)=> {
+      }, (err)=> {
       console.log('Connection Error' + err);
-    }) 
+    })  
   }
 
   connect() {
     
-    console.log(this.targetPeer)
-    this.peer.signal(JSON.parse(this.targetPeer));
+    console.log(this.targetPeer2)
+    this.peer.signal(JSON.parse(this.targetPeer2));
   }
 
   message() {
