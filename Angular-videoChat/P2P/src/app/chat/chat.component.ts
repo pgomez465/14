@@ -3,22 +3,23 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
 })
-export class AppComponent implements OnInit {
+export class ChatComponent implements OnInit {
+
   constructor(private db: AngularFirestore){}
+
   @ViewChild('myVideo') myVideo: any;
-  title = 'Home';
+
+  title = 'Chat';
 
   targetPeer: any;
   peer: any;
-  ID;
+  offer;
 
   ngOnInit () {
-
-    
 
     let video = this.myVideo.nativeElement;
     // Uncomment the next line for other browsers
@@ -26,21 +27,21 @@ export class AppComponent implements OnInit {
     //navigator.getUserMedia({video: true, audio: true}, (stream)=> {
 
       this.peer = new SimplePeer ({
-        initiator: location.hash === '#init',
+        initiator: location.hash === '/',
         trickle: false,
-       // stream: stream,
+        //stream: stream,
 
       }) 
 
       this.peer.on('signal', (data)=> {
         console.log(JSON.stringify(data));
-
-        this.targetPeer = JSON.stringify(data); 
-        from (this.db.doc('VideoIDs/IDs').update({P2P :this.targetPeer}))
-        
+  
+        this.targetPeer = JSON.stringify(data);
+        from (this.db.doc('VideoIDs/IDs').update({P2Pr :this.targetPeer}))
       })
+
       this.db.doc('VideoIDs/IDs').valueChanges().subscribe(val => {
-        this.targetPeer = val.P2Pr;
+        this.targetPeer = val.P2P;
       })
 
       this.peer.on('data', (data)=> {
@@ -60,8 +61,14 @@ export class AppComponent implements OnInit {
 
   connect() {
     
+        
+      
+      
     console.log(this.targetPeer)
+    
     this.peer.signal(JSON.parse(this.targetPeer));
+    
+    
   }
 
   message() {
