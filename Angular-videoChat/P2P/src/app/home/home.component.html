@@ -1,6 +1,14 @@
+<div class="container">
 <h1>{{title}}</h1>
-
-<button (click)="connect()">Connect</button>
-<button (click)="message()">Send Message</button>
+<textarea type="text" placeholder="Enter your message" [(ngModel)]="text"> </textarea>
 <br>
-<video #myVideo></video>
+<button (click)="connect()" class="btn btn-primary">Connect</button>
+<button (click)="message()" class="btn btn-primary">Send Message</button>
+</div>
+<div class="container">
+  <p>{{text}}</p>
+  <p>{{text2}}</p>
+</div>
+<div class="container">
+  <video #myVideo></video>
+</div>

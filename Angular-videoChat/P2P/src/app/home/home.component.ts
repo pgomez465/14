@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   targetPeer: any;
   targetPeer2: any;
   peer: any;
-  ID;
+  text;
+  text2;
 
   ngOnInit () {
 
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
       })
 
       this.peer.on('data', (data)=> {
-        console.log('Recieved DATA: ' + data);
+        this.text2 = data
 
       })
 
@@ -54,9 +55,9 @@ export class HomeComponent implements OnInit {
         video.play();
       })
 
-      }, (err)=> {
+     }, (err)=> {
       console.log('Connection Error' + err);
-    })  
+    })   
   }
 
   connect() {
@@ -66,7 +67,8 @@ export class HomeComponent implements OnInit {
   }
 
   message() {
-    this.peer.send('Hello World');
+    this.peer.send(this.text);
+
   }
 
 }
