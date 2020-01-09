@@ -3,23 +3,22 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class ChatComponent implements OnInit {
-
+export class HomeComponent implements OnInit {
   constructor(private db: AngularFirestore){}
-
   @ViewChild('myVideo') myVideo: any;
-
-  title = 'Chat';
+  title = 'Home';
 
   targetPeer: any;
   peer: any;
-  offer;
+  ID;
 
   ngOnInit () {
+
+    
 
     let video = this.myVideo.nativeElement;
     // Uncomment the next line for other browsers
@@ -29,19 +28,19 @@ export class ChatComponent implements OnInit {
       this.peer = new SimplePeer ({
         initiator: location.hash === '',
         trickle: false,
-        //stream: stream,
+        stream: stream,
 
       }) 
 
       this.peer.on('signal', (data)=> {
         console.log(JSON.stringify(data));
-  
-        this.targetPeer = JSON.stringify(data);
-        from (this.db.doc('VideoIDs/IDs').update({P2Pr :this.targetPeer}))
-      })
 
+        this.targetPeer = JSON.stringify(data); 
+        from (this.db.doc('VideoIDs/IDs').update({P2P :this.targetPeer}))
+        
+      })
       this.db.doc('VideoIDs/IDs').valueChanges().subscribe(val => {
-        this.targetPeer = val['P2P'];
+        this.targetPeer = val['P2Pr'];
       })
 
       this.peer.on('data', (data)=> {
@@ -61,14 +60,8 @@ export class ChatComponent implements OnInit {
 
   connect() {
     
-        
-      
-      
     console.log(this.targetPeer)
-    
     this.peer.signal(JSON.parse(this.targetPeer));
-    
-    
   }
 
   message() {

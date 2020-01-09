@@ -9,17 +9,20 @@ import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
+import { HomeComponent } from './home/home.component';
 
-const appRoutes: Routes = [
+/* const appRoutes: Routes = [
   { path: 'chat', component: ChatComponent },
+  { path: 'home', component: HomeComponent },
   { path: '', component: AppComponent },
  
-]
+] */
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent
+    ChatComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,11 @@ const appRoutes: Routes = [
       appId: "1:338028970834:web:3450073657d275fc22708b",
       measurementId: "G-J16SZTRXJQ"
     }),
-    RouterModule
+    RouterModule.forRoot([
+      { path: 'chat', component: ChatComponent },
+      { path: 'home', component: HomeComponent },
+      { path: '', component: HomeComponent },
+    ])
     
     ],
   providers: [AngularFirestore],
